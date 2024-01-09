@@ -221,7 +221,7 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 			const name = textPart.seb[1];
 			const filename: string = textPart.seb[0];
 			const metadata = filename.match(/[a-z0-9]+_?(\d+)?/i);
-			const height = metadata[1] || "auto";
+			const height = metadata[1] !== "undefined" ? metadata[1] : "auto";
 			const src = `${baseUrl}${filename}`;
 
 			return createElement(
