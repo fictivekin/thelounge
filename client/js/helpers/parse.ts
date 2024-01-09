@@ -7,6 +7,7 @@ import findChannels from "./ircmessageparser/findChannels";
 import {findLinks} from "../../../shared/linkify";
 import findEmoji from "./ircmessageparser/findEmoji";
 import findNames from "./ircmessageparser/findNames";
+import findSebs from "./ircmessageparser/findSebs";
 import merge, {MergedParts} from "./ircmessageparser/merge";
 import emojiMap from "./fullnamemap.json";
 import LinkPreviewToggle from "../../components/LinkPreviewToggle.vue";
@@ -114,11 +115,13 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 	const linkParts = findLinks(cleanText);
 	const emojiParts = findEmoji(cleanText);
 	const nameParts = findNames(cleanText, message ? message.users || [] : []);
+	const sebParts = findSebs(cleanText);
 
 	const parts = (channelParts as MergedParts)
 		.concat(linkParts)
 		.concat(emojiParts)
-		.concat(nameParts);
+		.concat(nameParts)
+		.concat(sebParts);
 
 	// Merge the styling information with the channels / URLs / nicks / text objects and
 	// generate HTML strings with the resulting fragments
@@ -211,6 +214,25 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 				{
 					default: () => fragments,
 				}
+			);
+		} else if (textPart.seb) {
+			const baseUrl = "https://d2nj10p1euioo5.cloudfront.net/";
+
+			const name = textPart.seb[1];
+			const filename: string = textPart.seb[0];
+			const metadata = filename.match(/[a-z0-9]+_?(\d+)?/i);
+			const height = metadata[1] || "auto";
+			const src = `${baseUrl}${filename}`;
+
+			return createElement(
+				"img",
+				{
+					class: ["seb"],
+					src: src,
+					title: name,
+					height: height,
+				},
+				fragments
 			);
 		}
 
