@@ -23,6 +23,7 @@ type OrderItem = Chan["id"] | Network["uuid"];
 type Order = OrderItem[];
 
 const events = [
+	"account",
 	"away",
 	"cap",
 	"connection",
@@ -48,6 +49,7 @@ const events = [
 	"topic",
 	"welcome",
 	"whois",
+	"users",
 ];
 
 type ClientPushSubscription = {

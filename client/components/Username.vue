@@ -1,6 +1,11 @@
 <template>
 	<span
-		:class="['user', {[nickColor]: store.state.settings.coloredNicks}, {active: active}]"
+		:class="[
+			'user',
+			{[nickColor]: store.state.settings.coloredNicks},
+			{active: active},
+			{away: user.away === true},
+		]"
 		:data-name="user.nick"
 		role="button"
 		v-on="onHover ? {mouseenter: hover} : {}"
@@ -69,6 +74,8 @@ export default defineComponent({
 				channel: props.channel,
 			});
 		};
+
+		const away = props.user.away!;
 
 		const store = useStore();
 
