@@ -2,6 +2,7 @@
 // @ts-nocheck
 
 import {h as createElement, VNode} from "vue";
+import constants from "../constants";
 import parseStyle from "./ircmessageparser/parseStyle";
 import findChannels from "./ircmessageparser/findChannels";
 import {findLinks} from "../../../shared/linkify";
@@ -216,13 +217,11 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 				}
 			);
 		} else if (textPart.seb) {
-			const baseUrl = "https://d2nj10p1euioo5.cloudfront.net/";
-
-			const name = textPart.seb[1];
-			const filename: string = textPart.seb[0];
+			const name = textPart.seb[0];
+			const filename: string = textPart.seb[1];
 			const metadata = filename.match(/[a-z0-9]+_?(\d+)?/i);
-			const height = metadata[1] !== "undefined" ? metadata[1] : "auto";
-			const src = `${baseUrl}${filename}`;
+			const height = metadata[1];
+			const src = `${constants.sebBaseUrl}${filename}`;
 
 			return createElement(
 				"img",
