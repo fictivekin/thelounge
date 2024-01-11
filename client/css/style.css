@@ -1771,6 +1771,72 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	white-space: nowrap;
 }
 
+#chat .names .user.away {
+	opacity: 0.35;
+}
+
+#chat .names .user.away::before {
+	content: "💤 ";
+}
+
+#chat .names .user.away.flight::before,
+#chat .names .user.away.travel::before {
+	content: "✈️ ";
+}
+
+#chat .names .user.away.food::before,
+#chat .names .user.away.lunch::before {
+	content: "🍔 ";
+}
+
+#chat .names .user.away.relocate::before,
+#chat .names .user.away.car::before,
+#chat .names .user.away.taxi::before {
+	content: "🚗 ";
+}
+
+#chat .names .user.away.judo::before,
+#chat .names .user.away.karate::before {
+	content: "🥋 ";
+}
+
+#chat .names .user.away.walk::before,
+#chat .names .user.away.break::before {
+	content: "🚶 ";
+}
+
+#chat .names .user.away.dog::before {
+	content: "🐕 ";
+}
+
+#chat .names .user.away.run::before,
+#chat .names .user.away.exercise::before {
+	content: "🏃 ";
+}
+
+#chat .names .user.away.call::before,
+#chat .names .user.away.phone::before {
+	content: "☎️ ";
+}
+
+#chat .names .user.away.focus::before {
+	content: "🎧 ";
+}
+
+#chat .names .user.away.doctor::before,
+#chat .names .user.away.appointment::before {
+	content: "🏥 ";
+}
+
+#chat .names .user.away.vacation::before,
+#chat .names .user.away.pto::before {
+	content: "🏖️ ";
+}
+
+#chat .names .user.away.coffee::before {
+	content: "☕️ ";
+}
+
 #chat .user-mode {
 	margin-bottom: 15px;
 }

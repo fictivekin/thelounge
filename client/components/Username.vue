@@ -1,6 +1,12 @@
 <template>
 	<span
-		:class="['user', {[nickColor]: store.state.settings.coloredNicks}, {active: active}]"
+		:class="[
+			'user',
+			{[nickColor]: store.state.settings.coloredNicks},
+			{active: active},
+			{away: user.away === true || (typeof user.away === 'string' && user.away.length > 0)},
+			{[user.away]: typeof user.away === 'string' && user.away.length > 0},
+		]"
 		:data-name="user.nick"
 		role="button"
 		v-on="onHover ? {mouseenter: hover} : {}"
